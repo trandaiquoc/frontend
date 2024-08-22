@@ -20,23 +20,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['fieldConfig' => [
                     'template' => "{label}\n{input}\n{error}",
                     'labelOptions' => [
-                        'class' => 'form-label' // Cập nhật class cho nhãn
+                        'class' => 'form-label'
                     ],
                     'inputOptions' => [
-                        'class' => 'form-control' // Cập nhật class cho input
+                        'class' => 'form-control'
                     ],
                     'errorOptions' => [
-                        'class' => 'invalid-feedback' // Cập nhật class cho lỗi
+                        'class' => 'invalid-feedback'
                     ]
                 ]]
             );
             ?>
 
-            <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Tên đăng nhập') ?>
+            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-            <?= $form->field($model, 'password')->passwordInput()->label('Mật khẩu') ?>
+            <?= $form->field($model, 'password')->passwordInput() ?>
 
-            <?= $form->field($model, 'rememberMe')->checkbox()->label('Ghi nhớ đăng nhập') ?>
+            <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
             <div class="form-group text-center">
                 <?= Html::submitButton('Đăng nhập', ['class' => 'btn btn-primary px-3 py-1', 'name' => 'login-button']) ?>

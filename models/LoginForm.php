@@ -78,4 +78,12 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Tài khoản',  // Gán nhãn cho trường 'username'
+            'password' => 'Mật khẩu',   // Gán nhãn cho trường 'password'
+            'rememberMe' => 'Ghi nhớ tôi', // Gán nhãn cho trường 'rememberMe'
+        ];
+    }
 }
