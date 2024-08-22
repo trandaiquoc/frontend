@@ -177,7 +177,10 @@ class SiteController extends Controller
         }
 
         // Chuyển hướng về trang chủ
-        return $this->goHome();
+        $model = new LoginForm();
+        return $this->render('login', [
+            'model' => $model
+        ]);
     }
 
     /**
