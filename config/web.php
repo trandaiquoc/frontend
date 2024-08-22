@@ -12,6 +12,9 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'httpClient' => [
+            'class' => 'yii\httpclient\Client',
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '8cq6V593DyOcN5jvx1qEDyZeQsSRK1pG',
@@ -42,7 +45,7 @@ $config = [
             ],
         ],
         'db' => $db,
-        
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -65,7 +68,7 @@ $config = [
         ]
     ],
     'params' => $params,
-    
+
 ];
 
 if (YII_ENV_DEV) {
