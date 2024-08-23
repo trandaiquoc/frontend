@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
@@ -9,6 +8,23 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public $password;
     public $authKey;
     public $accessToken;
+
+    private static $users = [
+        1 => [
+            'id' => 1,
+            'username' => 'admin',
+            'password' => 'admin123',
+            'authKey' => 'adminKey',
+            'accessToken' => 'adminToken',
+        ],
+        2 => [
+            'id' => 2,
+            'username' => 'user',
+            'password' => 'user123',
+            'authKey' => 'userKey',
+            'accessToken' => 'userToken',
+        ],
+    ];
 
     /**
      * {@inheritdoc}

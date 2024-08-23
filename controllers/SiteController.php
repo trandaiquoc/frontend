@@ -1,7 +1,6 @@
 <?php
 namespace app\controllers;
 
-use app\models\ContactForm;
 use app\models\LoginForm;
 use Yii;
 use yii\filters\AccessControl;
@@ -149,7 +148,7 @@ class SiteController extends Controller
     /**
      * Logout action.
      *
-     * @return Response
+     * @return Response|string
      */
     public function actionLogout()
     {
@@ -183,31 +182,4 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 }

@@ -36,13 +36,16 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'brandUrl' => Yii::$app->homeUrl,
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
-
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+        'options' => ['class' => 'navbar-nav me-auto '],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Points', 'url' => ['/point']]
+        ]
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav ml-auto'],
+        'items' => [
             Yii::$app->session->has('user') && Yii::$app->session->has('token')
                 ? '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'], 'post')
@@ -73,7 +76,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <div class="container">
         <div class="row text-muted">
             <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>
-            <div class="col-md-6 text-center text-md-end"><?= Yii::powered() ?></div>
+            <p>Powered by <a href="https://www.yiiframework.com/" rel="external">Yii Framework</a></p>
         </div>
     </div>
 </footer>

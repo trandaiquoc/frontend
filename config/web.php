@@ -42,6 +42,8 @@ $config = [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                    'categories' => ['application'],
+                    'logFile' => '@runtime/logs/app.log',
                 ],
             ],
         ],
@@ -51,6 +53,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'userprofile/point' => 'userprofile/point',
             ],
         ],
         'formatter' => [
