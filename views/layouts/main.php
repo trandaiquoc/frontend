@@ -40,7 +40,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-nav me-auto '],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Points', 'url' => ['/point']]
+            ['label' => 'Points', 'url' => ['/point']],
         ]
     ]);
     echo Nav::widget([

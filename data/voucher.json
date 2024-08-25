@@ -1,0 +1,30 @@
+{
+  "status": 200,
+  "message": "success",
+  "vouchers": [
+      {
+          "id": 1,
+          "name": "Voucher 20% Off",
+          "code": "SHOP20",
+          "point": "2000",
+          "valid_to": "2024-08-31",
+          "image_url": "https://product.hstatic.net/200000551679/product/tag-03_88e5f3eb05634ba0b653defd664b4853_grande.png"
+      },
+      {
+          "id": 2,
+          "name": "Voucher 50,000 VND Off",
+          "code": "SHOP50K",
+          "point": "1800",
+          "valid_to": "2024-09-01",
+          "image_url": "https://tuanphong.vn/pictures/thumb/2018/09/1537415394-426-voucher-50000-vnd-640x640.png"
+      },
+      {
+          "id": 3,
+          "name": "Voucher Buy 1 Get 1 Free",
+          "code": "B1G1FREE",
+          "point": "1000",
+          "valid_to": "2024-09-15",
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCl1dSZ6qeIu0YtyY6iuFmcs9md8vbitg6Vw&s"
+      }
+  ]
+}

@@ -1,11 +1,10 @@
 <?php
-
 namespace app\models;
 
 use Yii;
 
 /**
- * This is the model class for table "Point".
+ * This is the model class for table "userprofile".
  *
  * @property int $id
  * @property string $employee_id
@@ -23,15 +22,23 @@ use Yii;
  * @property int $point
  * @property int $locked
  */
-class Point extends \yii\db\ActiveRecord
+class UserProfile extends \yii\base\Model
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'Point';
-    }
+    public $id;
+    public $employee_id;
+    public $fullname;
+    public $username;
+    public $idcard;
+    public $taxcode;
+    public $address;
+    public $phonenumber;
+    public $bankaccountnumber;
+    public $password;
+    public $token;
+    public $created_at;
+    public $staffids;
+    public $point;
+    public $locked;
 
     /**
      * {@inheritdoc}
@@ -39,7 +46,7 @@ class Point extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['employee_id', 'fullname', 'username', 'idcard', 'password'], 'required'],
+            [['id', 'employee_id', 'fullname', 'username', 'idcard', 'password'], 'required'],
             [['address'], 'string'],
             [['created_at'], 'safe'],
             [['point', 'locked'], 'integer'],

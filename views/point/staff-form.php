@@ -8,6 +8,7 @@ use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var yii\data\ArrayDataProvider $dataProvider */
+/** @var app\models\UserProfileSearch $searchModel */
 
 $this->title = 'Danh Sách Nhân Viên';
 $this->params['breadcrumbs'][] = $this->title;
@@ -15,11 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="staff-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
     <?php Pjax::begin(); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -51,7 +51,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-
     <?php Pjax::end(); ?>
-
 </div>

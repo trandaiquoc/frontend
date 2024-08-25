@@ -41,9 +41,11 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'info', 'trace', 'profile'],
                     'categories' => ['application'],
                     'logFile' => '@runtime/logs/app.log',
+                    'maxFileSize' => 1024 * 2, // 2MB
+                    'maxLogFiles' => 10,
                 ],
             ],
         ],
@@ -54,6 +56,8 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'userprofile/point' => 'userprofile/point',
+                'vouchers' => 'voucher/index',
+                'vouchers/redeem/<id:\d+>' => 'voucher/redeem',
             ],
         ],
         'formatter' => [
