@@ -10,9 +10,17 @@ use yii\helpers\Url;
 /** @var yii\data\ArrayDataProvider $dataProvider */
 /** @var app\models\UserProfileSearch $searchModel */
 
+
 $this->title = 'Danh Sách Nhân Viên';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?= Html::a(
+    '<i class="fa fa-arrow-left"></i> <', 
+    ['index'], 
+    ['class' => 'btn btn-secondary', 'title' => 'Return']
+) ?>
+
 <div class="staff-index">
 
     <h1><?= Html::encode($this->title) ?></h1>

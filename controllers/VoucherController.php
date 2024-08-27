@@ -85,8 +85,9 @@ class VoucherController extends Controller
             // Call API to deduct points
             $apiClient = new Client();
             $apiResponse = $apiClient->get('http://localhost/backend/web/user-profile/add-point-to-staff', [
+                'senderId' => "System",
                 'plus' => -$voucher['point'],
-                'id' => Yii::$app->session->get('user')['id'],
+                'receiverId' => Yii::$app->session->get('user')['id'],
             ])->send();
 
             if ($apiResponse->isOk) {

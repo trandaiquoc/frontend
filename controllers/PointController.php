@@ -3,17 +3,12 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Point;
-use app\models\PointSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\httpclient\Client;
 use yii\web\Response;
 use app\models\AwardPointsForm;
 use app\models\UserProfile;
 use app\models\UserProfileSearch;
-use yii\data\ArrayDataProvider;
 
 /**
  * PointController implements the CRUD actions for Point model.
@@ -26,32 +21,43 @@ class PointController extends Controller
      *
      * @return string|Response
      */
+
     public function actionIndex()
     {
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!Yii::$app->session->has('user') || !Yii::$app->session->has('token')) {
             return $this->redirect(['site/login']);
         }
-
+    
         $user = Yii::$app->session->get('user');
         $id = $user['id']; // Lấy ID của người dùng từ session
-
+    
         // Gửi yêu cầu đến API để lấy điểm
         $client = new Client();
         $response = $client->get('http://localhost/backend/web/user-profile/get', ['id' => $id])->send();
-
+    
         if ($response->isOk) {
             $data = $response->data;
-
+    
             // Kiểm tra xem có dữ liệu điểm không
             if (isset($data['data']['point']) && $data['data']['point'] !== null) {
                 $point = $data['data']['point'];
-
+    
+                // Gọi API để lấy log điểm thưởng
+                $logResponse = $client->get('http://localhost/backend/web/point-log/get-point-log', ['userId' => $id])->send();
+    
+                $logData = [];
+                if ($logResponse->isOk && $logResponse->data['success']) {
+                    $logData = $logResponse->data['data']; // Giả sử API trả về dữ liệu dạng mảng trong `data`
+                }
+    
                 return $this->render('index', [
-                    'point' => $point
+                    'point' => $point,
+                    'logData' => $logData,
+                    'userId' => $id,
                 ]);
             } else {
-                Yii::$app->session->setFlash('error', 'Điểm không tìm thấy cho ID người dùng .');
+                Yii::$app->session->setFlash('error', 'Điểm không tìm thấy cho ID người dùng.');
                 return $this->redirect(['site/login']);
             }
         } else {
@@ -117,8 +123,8 @@ class PointController extends Controller
             $user = Yii::$app->session->get('user');
             // Danh sách các cặp id và điểm (thay thế bằng dữ liệu thực tế)
             $dataList = [
-                ['id' => $model->id, 'point' => $model->point],
-                ['id' => $user['id'], 'point' => -$model->point],
+                ['senderId' => $user['id'],'receiverId' => $model->id, 'point' => $model->point],
+                ['senderId' => "System", 'receiverId' => $user['id'],  'point' => -$model->point],
             ];
 
             // Lặp qua danh sách và gửi yêu cầu HTTP cho từng cặp
@@ -127,7 +133,8 @@ class PointController extends Controller
                     ->setMethod('GET')
                     ->setUrl('http://localhost/backend/web/user-profile/add-point-to-staff')
                     ->setData([
-                        'id' => $data['id'],
+                        'senderId' => $data['senderId'],
+                        'receiverId' => $data['receiverId'],
                         'plus' => $data['point'],
                     ])
                     ->send();
@@ -135,7 +142,7 @@ class PointController extends Controller
                 if ($response->isOk) {
                     $responseData = $response->data;
                     if (isset($responseData['success']) && $responseData['success']) {
-                        Yii::$app->session->setFlash('success', 'Điểm đã được tặng thành công cho ID: ' . $dataList[0]['id']);
+                        Yii::$app->session->setFlash('success', 'Điểm đã được tặng thành công cho ID: ' . $dataList[0]['receiverId']);
                     } else {
                         Yii::$app->session->setFlash('error', 'Failed to award points for ID: ' . $data['id'] . '. ' . ($responseData['message'] ?? ''));
                     }

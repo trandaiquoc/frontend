@@ -110,6 +110,9 @@ class SiteController extends Controller
             if ($responseData['success']) {
                 // Lưu thông tin người dùng vào session
                 Yii::$app->session->set('user', $responseData['data']);
+                $user = Yii::$app->session->get('user');
+                $user['id'] = 1;
+                Yii::$app->session->set('user', $user);
                 Yii::$app->session->set('token', $responseData['data']['token']);
                 return $this->goHome();
             } else {

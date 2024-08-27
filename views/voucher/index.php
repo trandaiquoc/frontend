@@ -8,7 +8,11 @@ use yii\helpers\Html;
 
 $this->title = 'Available Vouchers';
 ?>
-
+<?= Html::a(
+    '<i class="fa fa-arrow-left"></i> <', 
+    ['/point/index'], 
+    ['class' => 'btn btn-secondary', 'title' => 'Quay lại danh sách']
+) ?>
 <h1><?= Html::encode($this->title) ?></h1>
 <p><strong>Điểm hiện có: </strong> <?= $point ?></p>
 
